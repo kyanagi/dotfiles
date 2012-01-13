@@ -1,58 +1,184 @@
-alias mv='nocorrect mv'
-alias ls='ls -F --color=auto --show-control-chars'
-alias mgrep='migemo-grep /usr/local/share/migemo/migemo-dict'
-alias pd='popd'
-alias ll='ls -ltr'
-#alias -g L='| $PAGER'
+# -*- mode: sh; coding: utf-8 -*-
 
-setopt auto_remove_slash magic_equal_subst no_flow_control
-setopt extended_glob hist_ignore_dups monitor print_eight_bit
-setopt prompt_subst append_history share_history inc_append_history
-setopt auto_pushd pushd_ignore_dups 
-setopt numeric_glob_sort
-setopt hist_ignore_space
-
-function history-all { history -E 1 }
-
-function gd() {
-    dirs -v
-    echo -n "number: "
-    local newdir
-    read newdir
-    cd +"$newdir"
-}
-
+##################################################
+### キーバインド
+## Emacsキーバインド
 bindkey -e
 
+## ^ で上位ディレクトリへ移動
 function cdup() {
-   echo
-   cd ..
-   zle reset-prompt
+  echo
+  cd ..
+  zle reset-prompt
 }
 zle -N cdup
 bindkey '\^' cdup
 
-# keychain
-#keychain ~/.ssh/id_dsa
-#. .keychain/`hostname`-sh
-
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*' group-name ''
-cd
 
 
+##################################################
+### ヒストリ
+## メモリ上のヒストリ数
+export HISTSIZE=200000
+
+## ファイルに保存するヒストリ数とそのファイル
+export SAVEHIST=$HISTSIZE
+export HISTFILE=~/var/log/zsh-history
+
+## ヒストリファイルにコマンドラインだけでなく実行時刻と実行時間も保存する
+setopt extended_history
+
+## 同じコマンドラインを連続で実行した場合はヒストリに登録しない
+setopt hist_ignore_dups
+
+## スペースで始まるコマンドラインはヒストリに登録しない
+setopt hist_ignore_space
+
+## ヒストリから冗長なスペースを削除する
+setopt hist_reduce_blanks
+
+## zshプロセス間でヒストリを共有する
+setopt share_history
+
+## すぐヒストリファイルに追記する
+setopt inc_append_history
+
+## C-sでのヒストリ検索が潰されてしまうため、出力停止・開始用にC-s/C-qを使わない
+setopt no_flow_control
+
+## 全てのヒストリを表示
+function history-all { history -E 1 }
+
+## コマンドの入力中にC-pで、その入力で履歴を検索する
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
 
 
-# The following lines were added by compinstall
 
-zstyle ':completion:*' insert-unambiguous true
-zstyle ':completion:*' original false
-zstyle :compinstall filename '/Users/ani/.zshrc'
+##################################################
+### プロンプト
+## PROMPT内で変数展開・コマンド置換・算術演算を実行する
+setopt prompt_subst
 
+## 色の簡易表記のため
+autoload -U colors
+colors
+
+function setup_prompt {
+  local prompt_color
+  if [ -z "$SSH_CONNECTION" ]; then
+    prompt_color=cyan
+  else
+    case `hostname -s` in
+      hiro)
+        prompt_color=magenta
+        ;;
+      *)
+        prompt_color=yellow
+        ;;
+    esac
+  fi
+
+  export PROMPT="%{$fg[$prompt_color]%}%m%{$reset_color%}%# "
+  export RPROMPT="%{$fg[$prompt_color]%}[%~ %*]%{$reset_color%}"
+
+  case "$TERM" in
+    dumb*|emacs*)
+      PROMPT='%m%# '
+      RPROMPT=''
+      ;;
+  esac
+}
+setup_prompt
+
+
+
+##################################################
+### 補完
+## 初期化
 autoload -U compinit
 compinit -u
-# End of lines added by compinstall
+
+## 補完候補に色をつける
+eval `dircolors -b` # LS_COLORSの設定
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+## 補完リストを全てグループ分けして表示
+zstyle ':completion:*' group-name ''
+
+## 補完候補のカーソル選択を有効に
+zstyle ':completion:*:default' menu select=1
+
+## m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
+
+## 補完候補をキャッシュする。
+zstyle ':completion:*' use-cache yes
+
+## 詳細な情報を使う
+zstyle ':completion:*' verbose yes
+
+## メッセージフォーマット
+zstyle ':completion:*:descriptions' format '%B%d%b' # 補完リストの上に出てくるdescription
+zstyle ':completion:*:messages' format '%d' # 補完時のメッセージ
+zstyle ':completion:*:warnings' format 'No matches for: %d' # 補完がマッチしなかったとき
+
+## 辞書順ではなく数字順に並べる
+setopt numeric_glob_sort
+
+## 補完リストを詰めて表示
+setopt list_packed
+
+## ディレクトリの補完に続いてデリミタ等を入力したとき、
+## ディレクトリ末尾の「/」を自動的に削除する
+setopt auto_remove_slash
+
+
+
+##################################################
+### 展開
+## --prefix=~/localというように「=」の後でもファイル名展開を行う
+setopt magic_equal_subst
+
+## 拡張globを有効にする
+setopt extended_glob
+
+## 展開後のパスがディレクトリだったら最後に「/」をつける
+#setopt mark_dirs
+
+## {a-c}をa b cに展開する
+setopt brace_ccl
+
+
+
+##################################################
+### ジョブ
+## jobsでプロセスIDも出力する
+setopt long_list_jobs
+
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=3
+
+
+
+##################################################
+### エイリアス
+alias mv='nocorrect mv'
+alias ls='ls -F --color=auto --show-control-chars'
+
+
+
+##################################################
+### ディレクトリスタック
+## cdしたとき、移動前のディレクトリを自動でpushdする
+setopt auto_pushd
+
+## pushdのディレクトリスタックに重複を含めない
+setopt pushd_ignore_dups
+
+
+cd

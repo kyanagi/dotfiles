@@ -1,27 +1,121 @@
-export PATH=~/bin:/opt/ruby19/bin:/usr/local/mysql/bin:/usr/local/teTeX/bin:/opt/local/libexec/gnubin:/usr/local/bin:/opt/local/ghc/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/usr/local/teTeX/man:$MANPATH
+# -*- mode: sh; coding: utf-8 -*-
 
-export LIBRARY_PATH=/opt/local/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=/opt/local/lib:$LD_LIBRARY_PATH
-#export C_INCLUDE_PATH=/opt/local/include:$C_INCLUDE_PATH
+##################################################
+### パスの設定
+## 重複したパスを登録しない。
+typeset -U path
 
-# export PROMPT='%m%# '
-# export RPROMPT='[%~ %*]'
-export PROMPT='%{[36m%}%m%{[m%}%# '
-export RPROMPT='%{[36m%}[%~ %*]%{[m%}'
+## (N-/): 存在しないディレクトリは登録しない。
+##    パス(...): ...という条件にマッチするパスのみ残す。
+##            N: NULL_GLOBオプションを設定。
+##               globがマッチしなかったり存在しないパスを無視する。
+##            -: シンボリックリンク先のパスを評価。
+##            /: ディレクトリのみ残す。
+path=(
+  ~/bin(N-/)
+  /opt/ruby19/bin(N-/)
+  /usr/local/mysql/bin(N-/)
+  /usr/local/teTeX/bin(N-/)
+  /opt/local/libexec/gnubin(N-/)
+  /usr/local/bin(N-/)
+  /opt/local/ghc/bin(N-/)
+  /opt/local/bin(N-/)
+  /opt/local/sbin(N-/)
+  /usr/bin(N-/)
+  /bin(N-/)
+  /usr/sbin(N-/)
+  /sbin(N-/)
+)
 
-export HISTFILE=/Users/ani/var/log/zsh-history
-export SAVEHIST=200000
-export HISTSIZE=200000
+## man用パスの設定
+manpath=(
+  /usr/local/teTeX/man(N-/)
+  $manpath
+)
 
-export TERM=rxvt
-#export REFE_DATA_DIR=/usr/local/share/refe
 
-#export PAGER=less
-export GREP_OPTIONS='--color'
+## LD_LIBRARY_PATH
+typeset -xT LD_LIBRARY_PATH ld_library_path
+typeset -U ld_library_path
+ld_library_path=(
+  /opt/local/lib(N-/)
+)
 
-export EDITOR=vi
+## LIBRARY_PATH
+typeset -xT LIBRARY_PATH library_path
+typeset -U library_path
+library_path=(
+  /opt/local/lib(N-/)
+)
 
-#eval `dircolors -b`
 
+##################################################
+### コマンドの設定
+### PAGER ###
+if type lv > /dev/null 2>&1; then
+  export PAGER=lv
+else
+  export PAGER=less
+fi
+
+
+### lvの設定 ###
+if [ "$PAGER" = "lv" ]; then
+  ## -c: ANSIエスケープシーケンスの色付けなどを有効にする。
+  ## -l: 1行が長くと折り返されていても1行として扱う。
+  ##     （コピーしたときに余計な改行を入れない。）
+  export LV="-c -l"
+else
+  ## lvがなくてもlvでページャーを起動する。
+  alias lv="$PAGER"
+fi
+
+
+
+### grepの設定 ###
+grep_version="$(grep --version | head -n 1 | sed -e 's/^[^0-9.]*\([0-9.]*\)$/\1/')"
+export GREP_OPTIONS
+
+## バイナリファイルにはマッチさせない。
+GREP_OPTIONS="--binary-files=without-match"
+
+## grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
+case "$grep_version" in
+  1.*|2.[0-4].*|2.5.[0-3])
+    ;;
+  *)
+    ## grep 2.5.4以降のみの設定
+    GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+    ;;
+esac
+
+## 管理用ディレクトリを無視する。
+if grep --help | grep -q -- --exclude-dir
+then
+  GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
+  GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
+  GREP_OPTIONS="--exclude-dir=.hg $GREP_OPTIONS"
+  GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
+  GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
+fi
+
+## 可能なら色を付ける。
+if grep --help | grep -q -- --color
+then
+  GREP_OPTIONS="--color=auto $GREP_OPTIONS"
+fi
+
+
+
+### エディタの設定 ###
+export EDITOR=vim
+## vimがなくてもvimでviを起動する。
+if ! type vim > /dev/null 2>&1
+then
+  alias vim=vi
+fi
+
+
+
+### Emacsのshell modeで動くように
 [[ $EMACS = t ]] && unsetopt zle
