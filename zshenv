@@ -159,6 +159,4 @@ fi
 
 
 ### ホストごとの設定を読む
-hostspecialfile="${HOME}/.zsh.d/zshenv-${HOST}"
-source_if_exist $hostspecialfile
-unset hostspecialfile
+source_if_exist "${HOME}/.zsh.d/zshenv-${HOST}"
