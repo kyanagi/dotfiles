@@ -69,9 +69,13 @@ colors
 
 function setup_prompt {
   local prompt_color
+  local prompt_body
+
   if [ -z "$SSH_CONNECTION" ]; then
+    prompt_body='%m'
     prompt_color=cyan
   else
+    prompt_body='%n@%m'
     case $HOST in
       hiro)
         prompt_color=magenta
@@ -82,13 +86,14 @@ function setup_prompt {
     esac
   fi
 
-  export PROMPT="%{$fg[$prompt_color]%}%m%{$reset_color%}%# "
-  export RPROMPT="%{$fg[$prompt_color]%}[%~ %*]%{$reset_color%}"
-
   case "$TERM" in
     dumb*|emacs*)
       PROMPT='%m%# '
       RPROMPT=''
+      ;;
+    *)
+      PROMPT="%{$fg[$prompt_color]%}$prompt_body%{$reset_color%}%# "
+      RPROMPT="%{$fg[$prompt_color]%}[%~ %*]%{$reset_color%}"
       ;;
   esac
 }
