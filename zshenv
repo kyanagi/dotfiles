@@ -14,6 +14,18 @@
 ## 1: ~/.zlogout
 ## 2: /etc/zlogout
 
+### ZDOTDIR
+## ZDOTDIRが設定されているときは、上記の「~」のかわりにZDOTDIRが使われる。
+export ZDOTDIR=$HOME/.zsh.d
+
+
+### ファイルが存在すれば読み込む
+function source_if_exist {
+  for f in $*; do
+    [[ -f $f ]] && source $f
+  done
+}
+
 
 ##################################################
 ### locale の設定
@@ -148,5 +160,5 @@ fi
 
 ### ホストごとの設定を読む
 hostspecialfile="${HOME}/.zsh.d/zshenv-${HOST}"
-[[ -f $hostspecialfile ]] && source $hostspecialfile
+source_if_exist $hostspecialfile
 unset hostspecialfile
