@@ -1,5 +1,20 @@
 # -*- mode: sh; coding: utf-8 -*-
 
+### zsh起動時に設定ファイルが読まれる順番
+## 1: /etc/zshenv
+## 2: ~/.zshenv
+## 3: /etc/zprofile  もしログインシェルなら
+## 4: ~/.zprofile    もしログインシェルなら
+## 5: /etc/zshrc     もし対話的シェルなら
+## 6: ~/.zshrc       もし対話的シェルなら
+## 7: /etc/zlogin    もしログインシェルなら
+## 8: ~/.zlogin      もしログインシェルなら
+
+### ログアウト時
+## 1: ~/.zlogout
+## 2: /etc/zlogout
+
+
 ##################################################
 ### パスの設定
 ## 重複したパスを登録しない。
@@ -39,6 +54,7 @@ typeset -xT LD_LIBRARY_PATH ld_library_path
 typeset -U ld_library_path
 ld_library_path=(
   /opt/local/lib(N-/)
+  /usr/local/lib(N-/)
 )
 
 ## LIBRARY_PATH
@@ -46,6 +62,7 @@ typeset -xT LIBRARY_PATH library_path
 typeset -U library_path
 library_path=(
   /opt/local/lib(N-/)
+  /usr/local/lib(N-/)
 )
 
 
@@ -119,3 +136,9 @@ fi
 
 ### Emacsのshell modeで動くように
 [[ $EMACS = t ]] && unsetopt zle
+
+
+### ホストごとの設定を読む
+hostspecialfile="${HOME}/.zsh.d/zshenv-${HOST}"
+[[ -f $hostspecialfile ]] && source $hostspecialfile
+unset hostspecialfile

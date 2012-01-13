@@ -1,0 +1,14 @@
+# -*- mode: sh; coding: utf-8 -*-
+
+### Amazon EC2
+[ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath -u "$JAVA_HOME"`
+export EC2_HOME=/usr/local/ec2-api-tools
+path=($path $EC2_HOME/bin)
+export EC2_PRIVATE_KEY=$HOME/.ec2/pk-RGCM6PLMQTRB34KVQKWIODAVKISLMOPA.pem
+export EC2_CERT=$HOME/.ec2/cert-RGCM6PLMQTRB34KVQKWIODAVKISLMOPA.pem
+export EC2_URL=https://ec2.ap-northeast-1.amazonaws.com
+
+### ImageMagick
+export MAGICK_HOME=/usr/local/ImageMagick-6.7.3
+path=($MAGICK_HOME/bin $path)
+ld_library_path=($ld_library_path $MAGICK_HOME/lib)

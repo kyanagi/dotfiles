@@ -72,7 +72,7 @@ function setup_prompt {
   if [ -z "$SSH_CONNECTION" ]; then
     prompt_color=cyan
   else
-    case `hostname -s` in
+    case $HOST in
       hiro)
         prompt_color=magenta
         ;;
