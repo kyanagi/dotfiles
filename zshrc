@@ -113,7 +113,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:default' menu select=1
 
 ## m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## 補完候補をキャッシュする。
 zstyle ':completion:*' use-cache yes
