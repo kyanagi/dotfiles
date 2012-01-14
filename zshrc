@@ -14,6 +14,18 @@ function cdup() {
 zle -N cdup
 bindkey '\^' cdup
 
+## コマンドの入力中にC-pで、その入力で履歴を検索する
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+## ヒストリのインクリメンタル検索でglobを使えるように
+if zle -la history-incremental-pattern-search-backward; then
+  bindkey '^R' history-incremental-pattern-search-backward
+  bindkey '^S' history-incremental-pattern-search-forward
+fi
 
 
 ##################################################
@@ -48,13 +60,6 @@ setopt no_flow_control
 
 ## 全てのヒストリを表示
 function history-all { history -E 1 }
-
-## コマンドの入力中にC-pで、その入力で履歴を検索する
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
 
 
 
