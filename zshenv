@@ -110,38 +110,31 @@ fi
 
 
 ### grepの設定 ###
-grep_version="$(grep --version | head -n 1 | sed -e 's/^[^0-9.]*\([0-9.]*\)$/\1/')"
 export GREP_OPTIONS
+grep_help=$(grep --help)
 
 ## バイナリファイルにはマッチさせない。
 GREP_OPTIONS="--binary-files=without-match"
 
 ## grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-case "$grep_version" in
-  1.*|2.[0-4].*|2.5.[0-3])
-    ;;
-  *)
-    ## grep 2.5.4以降のみの設定
-    GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
-    ;;
-esac
+GREP_OPTIONS="--recursive $GREP_OPTIONS"
 
 ## 管理用ディレクトリを無視する。
-if grep --help | grep -q -- --exclude-dir
+if echo $grep_help | grep -q -- --exclude-dir
 then
-  GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
-  GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
-  GREP_OPTIONS="--exclude-dir=.hg $GREP_OPTIONS"
-  GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
-  GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
+  for ext (.svn .git .hg .deps .libs)
+  do
+    GREP_OPTIONS="--exclude-dir=$ext $GREP_OPTIONS"
+  done
 fi
 
 ## 可能なら色を付ける。
-if grep --help | grep -q -- --color
+if echo $grep_help | grep -q -- --color
 then
   GREP_OPTIONS="--color=auto $GREP_OPTIONS"
 fi
 
+unset grep_help
 
 
 ### エディタの設定 ###
