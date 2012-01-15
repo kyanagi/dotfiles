@@ -1,1 +1,2 @@
-source_if_exist $ZDOTDIR/zlogin
+[ -f $ZDOTDIR/zlogin ] && source $ZDOTDIR/zlogin
+

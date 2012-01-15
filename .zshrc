@@ -1,1 +1,2 @@
-source_if_exist $ZDOTDIR/zshrc
+[ -f $ZDOTDIR/zshrc ] && source $ZDOTDIR/zshrc
+

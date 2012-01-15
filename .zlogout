@@ -1,1 +1,2 @@
-source_if_exist $ZDOTDIR/zlogout
+[ -f $ZDOTDIR/zlogout ] && source $ZDOTDIR/zlogout
+

@@ -1,1 +1,2 @@
-source_if_exist $ZDOTDIR/zprofile
+[ -f $ZDOTDIR/zprofile ] && $ZDOTDIR/zprofile
+
