@@ -21,9 +21,7 @@ export ZDOTDIR=$HOME/.zsh.d
 
 ### ファイルが存在すれば読み込む
 function source_if_exist {
-  for f in $*; do
-    [[ -f $f ]] && source $f
-  done
+  [[ -f $1 ]] && source "$@"
 }
 
 
