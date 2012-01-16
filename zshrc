@@ -97,8 +97,8 @@ function setup_prompt {
       RPROMPT=''
       ;;
     *)
-      PROMPT="%{$fg[$prompt_color]%}$prompt_body%{$reset_color%}%# "
-      RPROMPT="%{$fg[$prompt_color]%}[%~ %*]%{$reset_color%}"
+      PROMPT="%F{$prompt_color}$prompt_body%f%# "
+      RPROMPT="%F{$prompt_color}[%~ %*]%f"
       ;;
   esac
 }
