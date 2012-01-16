@@ -115,7 +115,7 @@ compinit -u
 ## 補完リストに色をつける
 eval `dircolors -b` # LS_COLORSの設定
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#) [0-9a-z-]# #[0-9:.]# ([^ ]#)*=$color[none]=$color[bold]=$color[cyan]"
+zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b)[^0-9]#([0-9]#)*[0-9:.]## ([^ ]#)*=$color[none]=$color[bold];$color[cyan]=$color[green]"
 
 ## 補完リストを全てグループ分けして表示
 zstyle ':completion:*' group-name ''
