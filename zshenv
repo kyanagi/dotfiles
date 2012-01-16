@@ -14,9 +14,6 @@
 ## 1: ~/.zlogout
 ## 2: /etc/zlogout
 
-### ZDOTDIR
-## ZDOTDIRが設定されているときは、上記の「~」のかわりにZDOTDIRが使われる。
-export ZDOTDIR=$HOME/.zsh.d
 
 
 ### ファイルが存在すれば読み込む
