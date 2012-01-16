@@ -116,9 +116,6 @@ grep_help=$(grep --help)
 ## バイナリファイルにはマッチさせない。
 GREP_OPTIONS="--binary-files=without-match"
 
-## grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-GREP_OPTIONS="--recursive $GREP_OPTIONS"
-
 ## 管理用ディレクトリを無視する。
 if echo $grep_help | grep -q -- --exclude-dir
 then
@@ -133,6 +130,9 @@ if echo $grep_help | grep -q -- --color
 then
   GREP_OPTIONS="--color=auto $GREP_OPTIONS"
 fi
+
+## grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
+GREP_OPTIONS="--recursive $GREP_OPTIONS"
 
 unset grep_help
 
