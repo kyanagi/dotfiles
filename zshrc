@@ -119,8 +119,14 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 ## 補完リストを全てグループ分けして表示
 zstyle ':completion:*' group-name ''
 
-## 補完候補のカーソル選択を有効に
+## 補完リストが1画面に収まらなかったときのプロンプト
+zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+
+## 補完リストで候補のカーソル選択を有効に
 zstyle ':completion:*:default' menu select=1
+
+## カーソル選択で候補を選んでいるときのプロンプト（補完リストが1画面に収まらなかった場合）
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 
 ## m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
