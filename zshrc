@@ -207,7 +207,7 @@ WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # `/'と`='を抜く
 
 ### パッケージ管理
 source $ZDOTDIR/package.zsh
-
+source $ZDOTDIR/package-conf/zsh-syntax-highlighting.zsh
 
 
 ### ホームディレクトリから開始
