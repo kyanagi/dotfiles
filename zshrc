@@ -87,12 +87,23 @@ if is-at-least 4.3.10; then
   zstyle ':vcs_info:git:*' unstagedstr "%F{63}⚡%f"
   zstyle ':vcs_info:hg:*' unstagedstr "%F{136}⚡%f"
 
-  add-zsh-hook precmd _update_vcs_info_message
   function _update_vcs_info_message {
     vcs_info
     # get-revision が true だと %b が長いブランチ名になるので、短くしている
     vcs_info_msg_0_=${vcs_info_msg_0_//\%b/${vcs_info_msg_1_%%:*}}
   }
+
+  function enable_vcs_info {
+    add-zsh-hook precmd _update_vcs_info_message
+  }
+  function disable_vcs_info {
+    add-zsh-hook -d precmd _update_vcs_info_message
+  }
+
+  if [[ $(uname -o) != "Cygwin" ]]; then
+    # Cygwin だとちょっと重いのでデフォルトでは無効にしておく
+    _enable_vcs_info
+  fi
 fi
 
 
