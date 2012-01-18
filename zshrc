@@ -83,8 +83,9 @@ if is-at-least 4.3.10; then
   zstyle ':vcs_info:*' enable git hg
   zstyle ':vcs_info:hg:*' get-revision true
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:git:*' stagedstr "%F{160}⚡%f" # U+26A1 'HIGH VOLTAGE SIGN'
-  zstyle ':vcs_info:*' unstagedstr "%F{136}⚡%f"
+  zstyle ':vcs_info:git:*' stagedstr "%F{136}⚡%f" # U+26A1 'HIGH VOLTAGE SIGN'
+  zstyle ':vcs_info:git:*' unstagedstr "%F{63}⚡%f"
+  zstyle ':vcs_info:hg:*' unstagedstr "%F{136}⚡%f"
 
   add-zsh-hook precmd _update_vcs_info_message
   function _update_vcs_info_message {
