@@ -73,24 +73,33 @@ autoload -U colors
 colors
 
 ## バージョン管理システムの状態を表示する
-autoload -Uz is-at-least
-if is-at-least 4.3.10; then
+## 詳細は man zshcontrib
+function _setup_vcs_info {
   autoload -Uz vcs_info
   autoload -Uz add-zsh-hook
   zstyle ':vcs_info:*' max-exports 3
-  zstyle ':vcs_info:*' actionformats '%F{white}%s:%f%F{green}%%b%f:%F{magenta}%a%f%c%u' '%b' '%r'
-  zstyle ':vcs_info:*' formats       '%F{white}%s:%f%F{green}%%b%f%c%u' '%b' '%r' # ブランチ名は後で置換するので %%b にしておく
+  # formats は `hg:default' のように表示される。編集されているかどうかによって、`hg' の部分の色が変わる。
+  # get-revision が true だと %b が長くなるので、__branch-name__ と書いておいて後から置換する。
+  # %c stagedstr
+  # %u unstagedstr
+  # %s 使っている VCS
+  # %b ブランチ名
+  # %r リポジトリ名
+  # %a アクション名
+  zstyle ':vcs_info:*' actionformats '%F{white}%c%u%s%f%F{white}:%f%F{green}__branch-name__%f:%F{magenta}%a%f%c%u' '%b' '%r'
+  zstyle ':vcs_info:*' formats       '%F{white}%c%u%s%f%F{white}:%f%F{green}__branch-name__%f' '%b' '%r'
   zstyle ':vcs_info:*' enable git hg
-  zstyle ':vcs_info:hg:*' get-revision true
+
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:git:*' stagedstr "%F{136}⚡%f" # U+26A1 'HIGH VOLTAGE SIGN'
-  zstyle ':vcs_info:git:*' unstagedstr "%F{63}⚡%f"
-  zstyle ':vcs_info:hg:*' unstagedstr "%F{136}⚡%f"
+  zstyle ':vcs_info:hg:*' get-revision true # check-for-changes に必要
+  zstyle ':vcs_info:git:*' stagedstr "%F{136}"
+  zstyle ':vcs_info:git:*' unstagedstr "%F{63}"
+  zstyle ':vcs_info:hg:*' unstagedstr "%F{136}"
 
   function _update_vcs_info_message {
     vcs_info
     # get-revision が true だと %b が長いブランチ名になるので、短くしている
-    vcs_info_msg_0_=${vcs_info_msg_0_//\%b/${vcs_info_msg_1_%%:*}}
+    vcs_info_msg_0_=${vcs_info_msg_0_//__branch-name__/${vcs_info_msg_1_%%:*}}
   }
 
   function enable_vcs_info {
@@ -104,6 +113,11 @@ if is-at-least 4.3.10; then
     # Cygwin だとちょっと重いのでデフォルトでは無効にしておく
     enable_vcs_info
   fi
+}
+
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+  _setup_vcs_info
 fi
 
 
