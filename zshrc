@@ -102,7 +102,7 @@ if is-at-least 4.3.10; then
 
   if [[ $(uname -o) != "Cygwin" ]]; then
     # Cygwin だとちょっと重いのでデフォルトでは無効にしておく
-    _enable_vcs_info
+    enable_vcs_info
   fi
 fi
 
