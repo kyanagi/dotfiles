@@ -72,6 +72,29 @@ setopt prompt_subst
 autoload -U colors
 colors
 
+## バージョン管理システムの状態を表示する
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+  autoload -Uz vcs_info
+  autoload -Uz add-zsh-hook
+  zstyle ':vcs_info:*' max-exports 3
+  zstyle ':vcs_info:*' actionformats '%F{white}%s:%f%F{green}%%b%f:%F{magenta}%a%f%c%u' '%b' '%r'
+  zstyle ':vcs_info:*' formats       '%F{white}%s:%f%F{green}%%b%f%c%u' '%b' '%r' # ブランチ名は後で置換するので %%b にしておく
+  zstyle ':vcs_info:*' enable git hg
+  zstyle ':vcs_info:hg:*' get-revision true
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr "%F{160}⚡%f" # U+26A1 'HIGH VOLTAGE SIGN'
+  zstyle ':vcs_info:*' unstagedstr "%F{136}⚡%f"
+
+  add-zsh-hook precmd _update_vcs_info_message
+  function _update_vcs_info_message {
+    vcs_info
+    # get-revision が true だと %b が長いブランチ名になるので、短くしている
+    vcs_info_msg_0_=${vcs_info_msg_0_//\%b/${vcs_info_msg_1_%%:*}}
+  }
+fi
+
+
 function setup_prompt {
   local prompt_color
   local prompt_body
@@ -98,7 +121,17 @@ function setup_prompt {
       ;;
     *)
       PROMPT="%F{$prompt_color}$prompt_body%f%# "
-      RPROMPT="%F{$prompt_color}[%~ %*]%f"
+      local rprompt
+      rprompt=(
+        "%F{$prompt_color}["
+        "\${vcs_info_msg_0_:+\${vcs_info_msg_0_} }%f" # VCS の情報があれば表示
+        "%F{$prompt_color}"
+        # $PWD は ~ が展開されているので ~ に戻し、リポジトリ名の部分に下線を付ける。
+        # リポジトリ名は $vcs_info_msg_2_ に入っている。
+        "\${\${PWD/#\$HOME/~}/\${vcs_info_msg_2_}/%U\${vcs_info_msg_2_}%u}"
+        " %*]%f"
+      )
+      RPROMPT=${(j..)rprompt}
       ;;
   esac
 }
