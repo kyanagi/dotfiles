@@ -93,8 +93,8 @@ function _setup_vcs_info {
   local check_for_changes_enabled=1
   if [[ check_for_changes_enabled -eq 1 ]]; then
     zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:hg:*' get-revision true
-    zstyle ':vcs_info:hg:*' use-simple false
+    zstyle ':vcs_info:hg:*' get-revision true # hg で check-for-changes を有効にするには
+    zstyle ':vcs_info:hg:*' use-simple false  # この2つの設定が必要
   else
     zstyle ':vcs_info:*' check-for-changes false
     zstyle ':vcs_info:hg:*' get-revision false
