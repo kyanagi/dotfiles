@@ -57,7 +57,11 @@ path=(
   /sbin(N-/)
 )
 
-## man用パスの設定
+fpath=(
+  $ZDOTDIR/functions(N-/)
+  $fpath
+)
+
 manpath=(
   /usr/local/teTeX/man(N-/)
   $manpath

@@ -90,8 +90,17 @@ function _setup_vcs_info {
   zstyle ':vcs_info:*' formats       '%F{white}%c%u%s%f%F{white}:%f%F{green}__branch-name__%f' '%b' '%r'
   zstyle ':vcs_info:*' enable git hg
 
-  zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:hg:*' get-revision true # check-for-changes に必要
+  local check_for_changes_enabled=1
+  if [[ check_for_changes_enabled -eq 1 ]]; then
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:hg:*' get-revision true
+    zstyle ':vcs_info:hg:*' use-simple false
+  else
+    zstyle ':vcs_info:*' check-for-changes false
+    zstyle ':vcs_info:hg:*' get-revision false
+    zstyle ':vcs_info:hg:*' use-simple true # hexdump がないと速くならない。Cygwin では util-linux パッケージにある。
+  fi
+
   zstyle ':vcs_info:git:*' stagedstr "%F{136}"
   zstyle ':vcs_info:git:*' unstagedstr "%F{63}"
   zstyle ':vcs_info:hg:*' unstagedstr "%F{136}"
@@ -109,7 +118,7 @@ function _setup_vcs_info {
     add-zsh-hook -d precmd _update_vcs_info_message
   }
 
-  if [[ $(uname -o) != "Cygwin" ]]; then
+  if [[ $OSTYPE != "cygwin" ]]; then
     # Cygwin だとちょっと重いのでデフォルトでは無効にしておく
     enable_vcs_info
   fi
