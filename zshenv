@@ -152,3 +152,5 @@ fi
 
 ### ホストごとの設定を読む
 source_if_exist "${HOME}/.zsh.d/zshenv-${HOST}"
+source_if_exist "${HOME}/.zsh.d/zshenv.local"
+
