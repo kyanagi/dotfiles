@@ -118,8 +118,7 @@ function _setup_vcs_info {
     add-zsh-hook -d precmd _update_vcs_info_message
   }
 
-  if [[ $OSTYPE != "cygwin" ]]; then
-    # Cygwin だとちょっと重いのでデフォルトでは無効にしておく
+  if [[ $ENABLE_VCS_INFO -eq 1 ]]; then
     enable_vcs_info
   fi
 }
