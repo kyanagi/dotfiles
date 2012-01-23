@@ -88,7 +88,7 @@ function _setup_vcs_info {
   # %a アクション名
   zstyle ':vcs_info:*' actionformats '%F{white}%c%u%s%f%F{white}:%f%F{green}__branch-name__%f:%F{magenta}%a%f%c%u' '%b' '%r'
   zstyle ':vcs_info:*' formats       '%F{white}%c%u%s%f%F{white}:%f%F{green}__branch-name__%f' '%b' '%r'
-  zstyle ':vcs_info:*' enable git hg
+  zstyle ':vcs_info:*' enable hg git
 
   local check_for_changes_enabled=1
   if [[ check_for_changes_enabled -eq 1 ]]; then
