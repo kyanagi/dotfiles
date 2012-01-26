@@ -43,6 +43,7 @@ typeset -U path
 ##            /: ディレクトリのみ残す。
 path=(
   ~/bin(N-/)
+  ~/local/bin(N-/)
   /opt/ruby19/bin(N-/)
   /usr/local/mysql/bin(N-/)
   /usr/local/teTeX/bin(N-/)
