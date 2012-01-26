@@ -154,7 +154,7 @@ function setup_prompt {
       RPROMPT=''
       ;;
     *)
-      PROMPT="%F{$prompt_color}$prompt_body%f%# "
+      PROMPT="%F{$prompt_color}${PROMPT_BODY:-$prompt_body}%f%# "
       local rprompt
       rprompt=(
         "%F{$prompt_color}["
