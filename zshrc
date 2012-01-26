@@ -252,7 +252,15 @@ REPORTTIME=3
 ##################################################
 ### エイリアス
 alias mv='nocorrect mv'
-alias ls='ls -F --color=auto --show-control-chars'
+
+case "$OSTYPE" in
+  freebsd*)
+    alias ls='ls -F -G -w'
+    ;;
+  *)
+    alias ls='ls -F --color=auto --show-control-chars'
+    ;;
+esac
 
 
 
