@@ -151,6 +151,10 @@ fi
 [[ $EMACS = t ]] && unsetopt zle
 
 
+### メールチェックしない
+MAILCHECK=0
+
+
 ### ホストごとの設定を読む
 source_if_exist "${HOME}/.zsh.d/zshenv-${HOST}"
 source_if_exist "${HOME}/.zsh.d/zshenv.local"
