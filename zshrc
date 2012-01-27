@@ -260,12 +260,12 @@ alias mv='nocorrect mv'
 case "$OSTYPE" in
   freebsd*)
     alias ls='ls -F -G -w'
+    export LSCOLORS=ExgxfxdxCxDxDxhbadacec
     ;;
   *)
     alias ls='ls -F --color=auto --show-control-chars'
     ;;
 esac
-
 
 
 ##################################################
