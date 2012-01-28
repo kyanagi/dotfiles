@@ -3,4 +3,5 @@ syntax: glob
 packages
 .zcompcache
 zshenv.local
+zshrc.local
 
