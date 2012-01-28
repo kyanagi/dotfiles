@@ -298,5 +298,10 @@ source $ZDOTDIR/package-conf/zsh-manydots-magic.zsh
 #source $ZDOTDIR/package-conf/zsh-syntax-highlighting.zsh
 
 
+### ホストごとの設定を読む
+source_if_exist "${HOME}/.zsh.d/zshrc-${HOST}"
+source_if_exist "${HOME}/.zsh.d/zshrc.local"
+
+
 ### ホームディレクトリから開始
 cd
