@@ -86,25 +86,23 @@ library_path=(
 )
 
 
-##################################################
 ### コマンドの設定
-### PAGER ###
-if type lv > /dev/null 2>&1; then
-  export PAGER=lv
-else
-  export PAGER=less
-fi
+### PAGER は less にする
+export PAGER=less
 
 
-### lvの設定 ###
-if [ "$PAGER" = "lv" ]; then
+### less のデフォルトオプション
+export LESS='--max-back-scroll=1000 --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS'
+
+
+### lv
+if type lv > /dev/null 2>&1
+then
+  ## lv のデフォルトオプション
   ## -c: ANSIエスケープシーケンスの色付けなどを有効にする。
   ## -l: 1行が長くと折り返されていても1行として扱う。
   ##     （コピーしたときに余計な改行を入れない。）
   export LV="-c -l"
-else
-  ## lvがなくてもlvでページャーを起動する。
-  alias lv="$PAGER"
 fi
 
 
