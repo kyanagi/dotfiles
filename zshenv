@@ -92,7 +92,7 @@ export PAGER=less
 
 
 ### less のデフォルトオプション
-export LESS='--max-back-scroll=1000 --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --quiet'
+export LESS='--max-back-scroll=1000 --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS'
 
 
 ### lv
