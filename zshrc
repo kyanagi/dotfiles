@@ -284,8 +284,7 @@ WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # `/'と`='を抜く
 
 
 ### ビルトインコマンドでも run-help を使えるようにする
-unalias run-help
-autoload -Uz run-help
+unalias run-help > /dev/null 2>&1 && autoload -Uz run-help
 
 
 ### URL の入力をエスケープする
