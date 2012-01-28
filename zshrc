@@ -289,10 +289,6 @@ setopt pushd_ignore_dups
 
 
 
-### 単語境界に含まれない文字
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # `/'と`='を抜く
-
-
 ### ビルトインコマンドでも run-help を使えるようにする
 unalias run-help > /dev/null 2>&1 && autoload -Uz run-help
 
