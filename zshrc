@@ -288,6 +288,11 @@ unalias run-help
 autoload -Uz run-help
 
 
+### URL の入力をエスケープする
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
+
 ### パッケージ管理
 source $ZDOTDIR/package.zsh
 source $ZDOTDIR/package-conf/zsh-manydots-magic.zsh
