@@ -221,7 +221,7 @@ zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 
 ## m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## 補完候補をキャッシュする。
 zstyle ':completion:*' use-cache yes
