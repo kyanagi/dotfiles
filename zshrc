@@ -94,9 +94,9 @@ colors
 
 ## バージョン管理システムの状態を表示する
 ## 詳細は man zshcontrib
+autoload -Uz add-zsh-hook
 function _setup_vcs_info {
   autoload -Uz vcs_info
-  autoload -Uz add-zsh-hook
   zstyle ':vcs_info:*' max-exports 3
   # formats は `hg:default' のように表示される。編集されているかどうかによって、`hg' の部分の色が変わる。
   # get-revision が true だと %b が長くなるので、__branch-name__ と書いておいて後から置換する。
@@ -174,7 +174,7 @@ function setup_prompt {
       RPROMPT=''
       ;;
     *)
-      PROMPT="%F{$prompt_color}${PROMPT_BODY:-$prompt_body}%f%# "
+      PROMPT="%F{$prompt_color}${PROMPT_BODY:-$prompt_body}%f\${prompt_mark_color}%#%f "
       local rprompt
       rprompt=(
         "%F{$prompt_color}["
@@ -186,6 +186,23 @@ function setup_prompt {
         " %*]%f"
       )
       RPROMPT=${(j..)rprompt}
+
+      ## コマンドの終了ステータスに応じてプロンプトの色を変える。
+      ## 一度色違いで表示したら、プロンプト再描画の際には色を戻す。
+      function setup_prompt_mark_color {
+        if (( prompt_mark_displayed != 1 && $? != 0 )); then
+          prompt_mark_color='%F{magenta}'
+        else
+          prompt_mark_color=''
+        fi
+        prompt_mark_displayed=1
+      }
+      add-zsh-hook precmd setup_prompt_mark_color
+
+      function reset_prompt_mark_displayed {
+        prompt_mark_displayed=0
+      }
+      add-zsh-hook preexec reset_prompt_mark_displayed
       ;;
   esac
 }
