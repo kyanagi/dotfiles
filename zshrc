@@ -38,6 +38,16 @@ bindkey '^W' backward-kill-word-non-greedy
 bindkey "^X^W" backward-kill-word
 
 
+## コマンドラインスタックで、退避したコマンドを表示
+function push-line-with-buffer-stack {
+  POSTDISPLAY="
+stack: $LBUFFER"
+  zle push-line
+}
+zle -N push-line-with-buffer-stack
+bindkey "^[q" push-line-with-buffer-stack
+
+
 ##################################################
 ### ヒストリ
 ## メモリ上のヒストリ数
