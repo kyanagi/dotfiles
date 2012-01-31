@@ -234,6 +234,12 @@ zstyle ':completion:*:descriptions' format '%B%d%b' # 補完リストの上に�
 zstyle ':completion:*:messages' format '%d' # 補完時のメッセージ
 zstyle ':completion:*:warnings' format 'No matches for: %d' # 補完がマッチしなかったとき
 
+## man の補完をセクションごとに区分する
+zstyle ':completion:*:manuals' separate-sections true
+
+## セクション番号を挿入する(セクション1以外)
+zstyle ':completion:*:manuals.(^1*)' insert-sections true
+
 ## 辞書順ではなく数字順に並べる
 setopt numeric_glob_sort
 
