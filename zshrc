@@ -257,6 +257,9 @@ zstyle ':completion:*:manuals' separate-sections true
 ## セクション番号を挿入する(セクション1以外)
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 
+## コマンドラインに既に入力されているものは補完対象にしない
+zstyle ':completion:*:(rm|mv|cp|diff|kill):*' ignore-line other
+
 ## 辞書順ではなく数字順に並べる
 setopt numeric_glob_sort
 
