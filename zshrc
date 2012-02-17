@@ -223,7 +223,7 @@ if type dircolors > /dev/null; then
 else
   zstyle ':completion:*:default' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 fi
-zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b)[^0-9]#([0-9]#)*[0-9:.]## ([^ ]#)*=$color[none]=$color[bold];$color[cyan]=$color[green]"
+zstyle ':completion:*:*:*:*:processes' list-colors "=(#b)[^0-9]#([0-9]#)*[0-9:.]## ([^ ]#)*=$color[none]=$color[bold];$color[cyan]=$color[green]"
 
 ## 補完リストを全てグループ分けして表示
 zstyle ':completion:*' group-name ''
