@@ -260,6 +260,10 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 ## コマンドラインに既に入力されているものは補完対象にしない
 zstyle ':completion:*:(rm|mv|cp|diff|kill):*' ignore-line other
 
+## parent: foo/../ から foo を補完しない
+## pwd: ../ からカレントディレクトリを補完しない
+zstyle ':completion:*:(cd|mv|cp):*' ignore-parents parent pwd
+
 ## 辞書順ではなく数字順に並べる
 setopt numeric_glob_sort
 
