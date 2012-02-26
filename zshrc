@@ -6,13 +6,18 @@
 bindkey -e
 
 ## ^ で上位ディレクトリへ移動
-function cdup() {
-  echo
-  cd ..
-  zle reset-prompt
+## 入力の途中では通常の文字入力として扱う
+function cdup-or-insert-circumflex() {
+  if [[ -z "$BUFFER" ]]; then
+    echo
+    cd ..
+    zle reset-prompt
+  else
+    zle self-insert '^'
+  fi
 }
-zle -N cdup
-bindkey '\^' cdup
+zle -N cdup-or-insert-circumflex
+bindkey '\^' cdup-or-insert-circumflex
 
 ## コマンドの入力中にC-pで、その入力で履歴を検索する
 autoload history-search-end
