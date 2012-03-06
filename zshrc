@@ -187,7 +187,7 @@ function setup_prompt {
         "%F{$prompt_color}"
         # $PWD は ~ が展開されているので ~ に戻し、リポジトリ名の部分に下線を付ける。
         # リポジトリ名は $vcs_info_msg_2_ に入っている。
-        "\${\${PWD/#\$HOME/~}/\${vcs_info_msg_2_}/%U\${vcs_info_msg_2_}%u}"
+        "\${\${\${PWD/#\$HOME/~}/\/\${vcs_info_msg_2_}\///%U\${vcs_info_msg_2_}%u/}/%\/\${vcs_info_msg_2_}//%U\${vcs_info_msg_2_}%u}"
         " %*]%f"
       )
       RPROMPT=${(j..)rprompt}
