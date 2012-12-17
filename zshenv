@@ -47,7 +47,7 @@ path=(
   /opt/ruby19/bin(N-/)
   /usr/local/mysql/bin(N-/)
   /usr/local/teTeX/bin(N-/)
-  /usr/local/Cellar/coreutils/*/libexec/gnubin(om[1]N-/)
+  /usr/local/opt/coreutils/libexec/gnubin(N-/)
   /usr/local/bin(N-/)
   /usr/bin(N-/)
   /bin(N-/)
