@@ -347,6 +347,7 @@ zle -N self-insert url-quote-magic
 source $ZDOTDIR/package.zsh
 source $ZDOTDIR/package-conf/zsh-manydots-magic.zsh
 #source $ZDOTDIR/package-conf/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/package-conf/z.zsh
 
 
 ### ホストごとの設定を読む
