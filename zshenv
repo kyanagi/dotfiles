@@ -63,9 +63,10 @@ fpath=(
 )
 
 manpath=(
-  /usr/local/teTeX/man(N-/)
+  /usr/local/opt/coreutils/libexec/gnuman(N-/)
   $manpath
 )
+export MANPATH=$MANPATH:
 
 
 ## LD_LIBRARY_PATH
