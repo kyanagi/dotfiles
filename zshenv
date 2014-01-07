@@ -45,6 +45,7 @@ path=(
   ~/bin(N-/)
   ~/local/bin(N-/)
   ~/.cask/bin(N-/)
+  ~/.rbenv/bin(N-/)
   /usr/local/mysql/bin(N-/)
   /usr/local/teTeX/bin(N-/)
   /usr/local/opt/coreutils/libexec/gnubin(N-/)
@@ -133,6 +134,12 @@ fi
 GREP_OPTIONS="--recursive $GREP_OPTIONS"
 
 unset grep_help
+
+
+### rbenv
+if type rbenv > /dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
 
 ### エディタの設定 ###
