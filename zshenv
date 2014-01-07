@@ -68,6 +68,7 @@ manpath=(
 
 
 ## LD_LIBRARY_PATH
+unset LD_LIBRARY_PATH
 typeset -xT LD_LIBRARY_PATH ld_library_path
 typeset -U ld_library_path
 ld_library_path=(
@@ -76,6 +77,7 @@ ld_library_path=(
 )
 
 ## LIBRARY_PATH
+unset LIBRARY_PATH
 typeset -xT LIBRARY_PATH library_path
 typeset -U library_path
 library_path=(
