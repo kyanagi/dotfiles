@@ -339,6 +339,7 @@ case "$OSTYPE" in
     ;;
   *)
     alias ls='ls -F --color=auto --show-control-chars'
+    export TIME_STYLE=long-iso
     ;;
 esac
 
