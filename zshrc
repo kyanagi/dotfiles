@@ -246,7 +246,7 @@ if type dircolors > /dev/null; then
   eval `dircolors -b` # LS_COLORSの設定
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 else
-  zstyle ':completion:*:default' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+  zstyle ':completion:*:default' list-colors 'di=34;01' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 fi
 zstyle ':completion:*:*:*:*:processes' list-colors "=(#b)[^0-9]#([0-9]#)*[0-9:.]## ([^ ]#)*=$color[none]=$color[bold];$color[cyan]=$color[green]"
 
