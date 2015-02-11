@@ -361,7 +361,21 @@ case "$OSTYPE" in
     ;;
 esac
 
+
 alias be='bundle exec'
+
+
+function bundle-cd {
+  local output exit_status
+  output=`bundle show $1`
+  exit_status=$?
+  if [ $exit_status -eq 0 ]; then
+    cd "$output"
+  else
+    echo $output 1>&2
+    return $exit_status
+  fi
+}
 
 
 function man {
