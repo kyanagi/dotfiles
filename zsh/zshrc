@@ -366,6 +366,7 @@ zle -N self-insert url-quote-magic
 
 
 ### パッケージ管理
+PACKAGE_BASE_DIR="$ZDOTDIR/packages"
 source $ZDOTDIR/package.zsh
 source $ZDOTDIR/package-conf/zsh-manydots-magic.zsh
 #source $ZDOTDIR/package-conf/zsh-syntax-highlighting.zsh
