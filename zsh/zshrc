@@ -362,6 +362,28 @@ function man {
     man "$@"
 }
 
+function list-colors-display {
+  print -n "normal colors\t"
+  echo 'e.g. \\e[30m ... \\e[0m'
+  for i in {30..37}; do
+    printf "\e[%d;m %3d \e[0m" i i
+  done
+
+  print -n "\nlight colors\t"
+  echo 'e.g. \\e[1;30m ... \\e[0m'
+  for i in {30..37}; do
+    printf "\e[1;%d;m %3d \e[0m" i i
+  done
+
+  print -n "\n256 colors\t"
+  echo 'e.g. 128 -> \\e[38;5;128m ... \\e[0m'
+  for i in {0..255}; do
+    printf "\e[38;5;%dm %3d \e[0m" i i
+    (( ($i + 1) % 16 )) || echo
+  done
+}
+
+
 ##################################################
 ### ディレクトリスタック
 ## cdしたとき、移動前のディレクトリを自動でpushdする
