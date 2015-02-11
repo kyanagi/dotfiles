@@ -345,6 +345,23 @@ esac
 
 alias be='bundle exec'
 
+
+function man {
+  # mb: blinking
+  # md: bold
+  # so: standout-mode
+  # us: underline
+  env \
+    LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;76m' \
+    LESS_TERMCAP_so=$'\E[48;5;94;1;37m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    man "$@"
+}
+
 ##################################################
 ### ディレクトリスタック
 ## cdしたとき、移動前のディレクトリを自動でpushdする
