@@ -1,0 +1,20 @@
+[user]
+	name = Kouhei Yanagita
+	email = yanagi@shakenbu.org
+[color]
+	ui = auto
+[alias]
+	st = status
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	di = diff
+	difff = diff --word-diff
+        undo-commit = reset HEAD^
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore
+	precomposeunicode = true
+[pager]
+	log = diff-highlight | lv
+	show = diff-highlight | lv
+	diff = diff-highlight | lv
