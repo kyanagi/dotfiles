@@ -82,6 +82,14 @@ function do_enter() {
 zle -N do_enter
 bindkey '^m' do_enter
 
+## Alt+Enter で git diff を表示する
+function my-git-diff {
+  git diff
+  zle reset-prompt
+  return 0
+}
+zle -N my-git-diff
+bindkey "^[^m" my-git-diff
 
 ##################################################
 ### ヒストリ
