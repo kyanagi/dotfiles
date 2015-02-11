@@ -1,0 +1,6 @@
+.zcompdump
+packages/
+.zcompcache
+zshenv.local
+zshrc.local
+
