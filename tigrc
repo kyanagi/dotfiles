@@ -7,3 +7,10 @@ bind generic g move-first-line
 bind generic G move-last-line
 bind generic b move-page-up
 bind generic 1 !@sh -c "echo %(commit) | cut -c-10 | tr -d '\n' | pbcopy"
+
+color id 101 default
+color date 66 default
+color author 64 default
+color main-head 208 default underline
+color main-ref cyan default
+
