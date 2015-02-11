@@ -1,0 +1,9 @@
+set line-graphics = ascii
+set main-view = line-number:true,interval=1 id date:local author commit-title:graph=yes,refs=yes
+set refs-view = date:local author:full id ref:true commit-title:true
+
+bind generic G none
+bind generic g move-first-line
+bind generic G move-last-line
+bind generic b move-page-up
+bind generic 1 !@sh -c "echo %(commit) | cut -c-10 | tr -d '\n' | pbcopy"
