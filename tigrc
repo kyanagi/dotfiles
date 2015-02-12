@@ -1,4 +1,5 @@
 set line-graphics = ascii
+set ignore-case = true
 set main-view = line-number:true,interval=1 id date:local author commit-title:graph=yes,refs=yes
 set refs-view = date:local author:full id ref:true commit-title:true
 
