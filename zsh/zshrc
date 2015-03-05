@@ -19,6 +19,18 @@ function cdup-or-insert-circumflex() {
 zle -N cdup-or-insert-circumflex
 bindkey '\^' cdup-or-insert-circumflex
 
+## M-^ で git のワークツリーのトップに移動
+function cd-git-toplevel() {
+  local toplevel
+  if toplevel=$(git rev-parse --show-toplevel 2> /dev/null); then
+    echo
+    cd $toplevel
+    zle reset-prompt
+  fi
+}
+zle -N cd-git-toplevel
+bindkey '^[\^' cd-git-toplevel
+
 ## コマンドの入力中にC-pで、その入力で履歴を検索する
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
