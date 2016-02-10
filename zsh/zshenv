@@ -165,3 +165,6 @@ MAILCHECK=0
 source_if_exist "${HOME}/.zsh.d/zshenv-${HOST}"
 source_if_exist "${HOME}/.zsh.d/zshenv.local"
 
+
+### /etc/zprofile等は読まない
+setopt no_global_rcs
