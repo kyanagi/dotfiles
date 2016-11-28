@@ -162,8 +162,8 @@ MAILCHECK=0
 
 
 ### ホストごとの設定を読む
-source_if_exist "${HOME}/.zsh.d/zshenv-${HOST}"
-source_if_exist "${HOME}/.zsh.d/zshenv.local"
+source_if_exist "${ZDOTDIR}/zshenv-${HOST}"
+source_if_exist "${ZDOTDIR}/zshenv.local"
 
 
 ### /etc/zprofile等は読まない
