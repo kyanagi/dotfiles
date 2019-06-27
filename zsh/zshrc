@@ -212,15 +212,12 @@ function setup_prompt {
     prompt_body='%m'
     prompt_color=cyan
   else
-    prompt_body='%n@%m'
-    case $HOST in
-      hiro)
-        prompt_color=magenta
-        ;;
-      *)
-        prompt_color=yellow
-        ;;
-    esac
+    prompt_body="%n@${EC2_INSTANCE_NAME:-%m}"
+    if [ "$EC2_INSTANCE_ENV" = "production" ]; then
+      prompt_color=magenta
+    else
+      prompt_color=yellow
+    fi
   fi
 
   case "$TERM" in
