@@ -426,6 +426,34 @@ function list-colors-display {
   done
 }
 
+## grep
+typeset -a grep_options
+grep_help=$(grep --help)
+
+# バイナリファイルにはマッチさせない。
+grep_options=(--binary-files=without-match )
+
+# 管理用ディレクトリを無視する
+if echo $grep_help | grep -q -- --exclude-dir
+then
+  for ext (.svn .git .hg .deps .libs)
+  do
+    grep_options=($grep_options --exclude-dir=${ext})
+  done
+fi
+
+# 可能なら色を付ける。
+if echo $grep_help | grep -q -- --color
+then
+  grep_options=($grep_options --color=auto)
+fi
+
+# ディレクトリは再帰的にgrepする
+grep_options=($grep_options --recursive)
+
+alias grep="grep $grep_options"
+unset grep_help
+
 
 ##################################################
 ### ディレクトリスタック

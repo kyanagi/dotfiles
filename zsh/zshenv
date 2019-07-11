@@ -108,35 +108,6 @@ then
 fi
 
 
-
-### grepの設定 ###
-export GREP_OPTIONS
-grep_help=$(grep --help)
-
-## バイナリファイルにはマッチさせない。
-GREP_OPTIONS="--binary-files=without-match"
-
-## 管理用ディレクトリを無視する。
-if echo $grep_help | grep -q -- --exclude-dir
-then
-  for ext (.svn .git .hg .deps .libs)
-  do
-    GREP_OPTIONS="--exclude-dir=$ext $GREP_OPTIONS"
-  done
-fi
-
-## 可能なら色を付ける。
-if echo $grep_help | grep -q -- --color
-then
-  GREP_OPTIONS="--color=auto $GREP_OPTIONS"
-fi
-
-## grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-GREP_OPTIONS="--recursive $GREP_OPTIONS"
-
-unset grep_help
-
-
 ### rbenv
 if type rbenv > /dev/null 2>&1; then
   eval "$(rbenv init -)"
