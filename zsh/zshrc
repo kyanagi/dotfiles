@@ -449,7 +449,7 @@ then
 fi
 
 # ディレクトリは再帰的にgrepする
-grep_options=($grep_options --recursive)
+#grep_options=($grep_options --recursive)
 
 alias grep="grep $grep_options"
 unset grep_help
