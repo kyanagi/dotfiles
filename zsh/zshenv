@@ -87,6 +87,16 @@ library_path=(
   /usr/local/lib(N-/)
 )
 
+if type brew > /dev/null 2>&1
+then
+  local READLINE_PATH=$(brew --prefix readline)
+  local OPENSSL_PATH=$(brew --prefix openssl@1.1)
+  export LDFLAGS="-L$READLINE_PATH/lib -L$OPENSSL_PATH/lib"
+  export CPPFLAGS="-I$READLINE_PATH/include -I$OPENSSL_PATH/include"
+  export PKG_CONFIG_PATH="$READLINE_PATH/lib/pkgconfig:$OPENSSL_PATH/lib/pkgconfig"
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$OPENSSL_PATH --with-readline-dir=$READLINE_PATH --disable-install-doc"
+  export PATH=$OPENSSL_PATH/bin:$PATH
+fi
 
 ### コマンドの設定
 ### PAGER は less にする
