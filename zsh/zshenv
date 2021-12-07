@@ -41,6 +41,13 @@ typeset -U path
 ##               globがマッチしなかったり存在しないパスを無視する。
 ##            -: シンボリックリンク先のパスを評価。
 ##            /: ディレクトリのみ残す。
+
+if type /usr/local/bin/brew > /dev/null 2>&1; then
+  eval $(/usr/local/bin/brew shellenv)
+elif type /opt/homebrew/bin/brew > /dev/null 2>&1; then
+  eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 path=(
   ~/bin(N-/)
   ~/local/bin(N-/)
@@ -48,7 +55,10 @@ path=(
   ~/.rbenv/bin(N-/)
   /usr/local/mysql/bin(N-/)
   /usr/local/teTeX/bin(N-/)
-  /usr/local/opt/coreutils/libexec/gnubin(N-/)
+  $(brew --prefix binutils)/bin(N-/)
+  $(brew --prefix coreutils)/libexec/gnubin(N-/)
+  $(brew --prefix findutils)/libexec/gnubin(N-/)
+  $(brew --prefix gnu-tar)/libexec/gnubin(N-/)
   /usr/local/bin(N-/)
   /usr/bin(N-/)
   /bin(N-/)
@@ -58,12 +68,12 @@ path=(
 
 fpath=(
   $ZDOTDIR/functions(N-/)
-  /usr/local/share/zsh-completions(N-/)
+  $(brew --prefix zsh-completions)/share/zsh-completions(N-/)
   $fpath
 )
 
 manpath=(
-  /usr/local/opt/coreutils/libexec/gnuman(N-/)
+  $(brew --prefix coreutils)/libexec/gnuman(N-/)
   $manpath
 )
 export MANPATH=$MANPATH:
