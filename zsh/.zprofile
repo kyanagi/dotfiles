@@ -1,2 +1,2 @@
-[ -f $ZDOTDIR/zprofile ] && $ZDOTDIR/zprofile
+[ -f $ZDOTDIR/zprofile ] && source $ZDOTDIR/zprofile
 
