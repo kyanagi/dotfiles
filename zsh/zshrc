@@ -106,7 +106,7 @@ bindkey "^[^m" my-git-diff
 ##################################################
 ### ヒストリ
 ## メモリ上のヒストリ数
-export HISTSIZE=200000
+export HISTSIZE=2000000
 
 ## ファイルに保存するヒストリ数とそのファイル
 export SAVEHIST=$HISTSIZE
