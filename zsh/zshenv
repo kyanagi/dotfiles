@@ -53,22 +53,20 @@ path=(
   ~/local/bin(N-/)
   ~/.cask/bin(N-/)
   ~/.rbenv/bin(N-/)
-  /usr/local/mysql/bin(N-/)
-  /usr/local/teTeX/bin(N-/)
+  ~/.nodebrew/current/bin(N-/)
+  $(brew --prefix grep)/libexec/gnubin(N-/)
   $(brew --prefix binutils)/bin(N-/)
   $(brew --prefix coreutils)/libexec/gnubin(N-/)
   $(brew --prefix findutils)/libexec/gnubin(N-/)
   $(brew --prefix gnu-tar)/libexec/gnubin(N-/)
   /usr/local/bin(N-/)
-  /usr/bin(N-/)
-  /bin(N-/)
-  /usr/sbin(N-/)
-  /sbin(N-/)
+  $path
 )
 
 fpath=(
   $ZDOTDIR/functions(N-/)
-  $(brew --prefix zsh-completions)/share/zsh-completions(N-/)
+  ~/g/zsh-completions/src(N-/)
+  $(brew --prefix)/share/zsh/site-functions(N-/)
   $fpath
 )
 
