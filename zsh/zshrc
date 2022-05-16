@@ -467,7 +467,19 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 
+### gitワークツリー内に移動したときはブランチ名を表示
+function chpwd_show_git_branch() {
+  local git_toplevel
+  git_toplevel=$(git rev-parse --show-toplevel 2> /dev/null)
 
+  # 移動先がgitワークツリー内で、移動前と別ワークツリーだったら
+  if [[ -n $git_toplevel && $git_toplevel != $git_toplevel_prev ]]; then
+    echo "## ${fg[green]}$(git rev-parse --abbrev-ref @)"
+  fi
+
+  git_toplevel_prev=${git_toplevel}
+}
+add-zsh-hook chpwd chpwd_show_git_branch
 
 ### ビルトインコマンドでも run-help を使えるようにする
 unalias run-help > /dev/null 2>&1 && autoload -Uz run-help
