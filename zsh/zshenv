@@ -68,12 +68,6 @@ fpath=(
   $fpath
 )
 
-manpath=(
-  ${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman(N-/)
-  $manpath
-)
-export MANPATH=$MANPATH:
-
 
 ## LD_LIBRARY_PATH
 unset LD_LIBRARY_PATH
