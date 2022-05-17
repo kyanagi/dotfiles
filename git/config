@@ -16,8 +16,8 @@
 	excludesfile = ~/.gitignore
 	precomposeunicode = true
 [pager]
-	log = diff-highlight | lv
-	show = diff-highlight | lv
-	diff = diff-highlight | lv
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
 [diff]
 	compactionHeuristic = true
