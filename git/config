@@ -13,7 +13,6 @@
 [push]
 	default = simple
 [core]
-	excludesfile = ~/.gitignore
 	precomposeunicode = true
 [pager]
 	log = diff-highlight | less
