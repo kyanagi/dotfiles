@@ -42,23 +42,21 @@ typeset -U path
 ##            -: シンボリックリンク先のパスを評価。
 ##            /: ディレクトリのみ残す。
 
-if type /usr/local/bin/brew > /dev/null 2>&1; then
-  eval $(/usr/local/bin/brew shellenv)
-elif type /opt/homebrew/bin/brew > /dev/null 2>&1; then
+if type /opt/homebrew/bin/brew > /dev/null 2>&1; then
   eval $(/opt/homebrew/bin/brew shellenv)
+elif type /usr/local/bin/brew > /dev/null 2>&1; then
+  eval $(/usr/local/bin/brew shellenv)
 fi
+
+for formula in grep utils coreutils findutils gnu-tar
+do
+  path=(${HOMEBREW_PREFIX}/opt/${formula}/libexec/gnubin(N-/) $path)
+done
 
 path=(
   ~/bin(N-/)
   ~/local/bin(N-/)
-  ~/.cask/bin(N-/)
-  ~/.rbenv/bin(N-/)
   ~/.nodebrew/current/bin(N-/)
-  $(brew --prefix grep)/libexec/gnubin(N-/)
-  $(brew --prefix binutils)/bin(N-/)
-  $(brew --prefix coreutils)/libexec/gnubin(N-/)
-  $(brew --prefix findutils)/libexec/gnubin(N-/)
-  $(brew --prefix gnu-tar)/libexec/gnubin(N-/)
   /usr/local/bin(N-/)
   $path
 )
@@ -66,12 +64,12 @@ path=(
 fpath=(
   $ZDOTDIR/functions(N-/)
   ~/g/zsh-completions/src(N-/)
-  $(brew --prefix)/share/zsh/site-functions(N-/)
+  ${HOMEBREW_PREFIX}/share/zsh/site-functions(N-/)
   $fpath
 )
 
 manpath=(
-  $(brew --prefix coreutils)/libexec/gnuman(N-/)
+  ${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman(N-/)
   $manpath
 )
 export MANPATH=$MANPATH:
@@ -97,8 +95,8 @@ library_path=(
 
 if type brew > /dev/null 2>&1
 then
-  local READLINE_PATH=$(brew --prefix readline)
-  local OPENSSL_PATH=$(brew --prefix openssl@1.1)
+  local READLINE_PATH="${HOMEBREW_PREFIX}/opt/readline"
+  local OPENSSL_PATH="${HOMEBREW_PREFIX}/opt/openssl@1.1"
   export LDFLAGS="-L$READLINE_PATH/lib -L$OPENSSL_PATH/lib"
   export CPPFLAGS="-I$READLINE_PATH/include -I$OPENSSL_PATH/include"
   export PKG_CONFIG_PATH="$READLINE_PATH/lib/pkgconfig:$OPENSSL_PATH/lib/pkgconfig"
@@ -135,7 +133,7 @@ fi
 
 ### rbenv
 if type rbenv > /dev/null 2>&1; then
-  eval "$(rbenv init -)"
+  eval "$(rbenv init - zsh)"
 fi
 
 
