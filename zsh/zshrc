@@ -512,4 +512,4 @@ source_if_exist "${HOME}/.zsh.d/zshrc.local"
 
 
 ### ホームディレクトリから開始
-cd
+#cd
