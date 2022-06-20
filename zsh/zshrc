@@ -402,6 +402,10 @@ function man {
     man "$@"
 }
 
+function zman {
+  PAGER="less -g -s -p '^       "$1"'" man zshall
+}
+
 function list-colors-display {
   print -n "normal colors\t"
   echo 'e.g. \\e[30m ... \\e[0m'
