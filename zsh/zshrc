@@ -478,6 +478,14 @@ export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_CTRL_R_OPTS='--bind=ctrl-e:accept'
 
 
+### zoxide
+if type zoxide > /dev/null 2>&1; then
+  export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
+  export _ZO_ECHO="1"
+  eval "$(zoxide init zsh --cmd c)"
+fi
+
+
 ### gitワークツリー内に移動したときはブランチ名を表示
 function chpwd_show_git_branch() {
   local git_toplevel
