@@ -1,3 +1,5 @@
+# -*- mode: sh; coding: utf-8 -*-
+
 print -n "normal colors\t"
 echo 'e.g. \\e[30m ... \\e[0m'
 for i in {30..37}; do

@@ -1,3 +1,14 @@
+# -*- mode: sh; coding: utf-8 -*-
+
+# eval "$(...)" をキャッシュする
+#
+# Usage:
+#   evalcache [ arg ... ]
+#
+# eval "$(arg ...)" を実行し、その結果をファイルにキャッシュする。
+# キャッシュがある場合はコマンドは実行されず、
+# キャッシュファイルを読んだ結果を eval する。
+
 ZSH_EVAL_CACHE_DIR="${ZSH_EVAL_CACHE_DIR:-${XDG_CACHE_HOME}/evalcache}"
 
 local cachefile="${ZSH_EVAL_CACHE_DIR}/${1:t}"

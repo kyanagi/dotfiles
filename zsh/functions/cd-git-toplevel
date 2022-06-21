@@ -1,5 +1,5 @@
 # -*- mode: sh; coding: utf-8 -*-
-### git のワークツリーのトップに移動
+# git のワークツリーのトップに移動
 local toplevel
 if toplevel=$(git rev-parse --show-toplevel 2> /dev/null); then
   echo

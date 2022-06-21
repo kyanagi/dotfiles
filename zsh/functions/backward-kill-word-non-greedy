@@ -1,1 +1,3 @@
+# -*- mode: sh; coding: utf-8 -*-
+# `/' と `=' で止まる backward-kill-word
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>' zle backward-kill-word

@@ -1,3 +1,4 @@
+# -*- mode: sh; coding: utf-8 -*-
 if ((REGION_ACTIVE)); then
   zle kill-region
 else
