@@ -1,0 +1,9 @@
+# -*- mode: sh; coding: utf-8 -*-
+
+if [[ -z "$BUFFER" ]]; then
+  echo
+  cd ..
+  zle reset-prompt
+else
+  zle self-insert '^'
+fi

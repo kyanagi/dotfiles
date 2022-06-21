@@ -1,6 +1,7 @@
 .zcompdump
 packages/
 .zcompcache
+*.zwc
 zshenv.local
 zshrc.local
 

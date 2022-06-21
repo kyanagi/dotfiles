@@ -1,0 +1,8 @@
+ZSH_EVAL_CACHE_DIR="${ZSH_EVAL_CACHE_DIR:-${XDG_CACHE_HOME}/evalcache}"
+
+local cachefile="${ZSH_EVAL_CACHE_DIR}/${1:t}"
+if [[ ! -f "$cachefile" ]]; then
+  mkdir -p $ZSH_EVAL_CACHE_DIR
+  "$@" > "$cachefile" && zcompile "$cachefile"
+fi
+source "$cachefile"

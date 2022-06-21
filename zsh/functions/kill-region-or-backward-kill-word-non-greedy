@@ -1,0 +1,5 @@
+if ((REGION_ACTIVE)); then
+  zle kill-region
+else
+  backward-kill-word-non-greedy
+fi

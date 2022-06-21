@@ -1,0 +1,16 @@
+if [[ -n "$BUFFER" ]]; then
+  zle accept-line
+  return 0
+fi
+
+echo
+eval ls # エイリアスを展開
+
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  echo
+  echo -e "\e[0;33m--- git status ---\e[0m"
+  git status -sb
+fi
+
+zle reset-prompt
+return 0

@@ -1,0 +1,1 @@
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>' zle backward-kill-word
