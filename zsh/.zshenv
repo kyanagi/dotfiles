@@ -30,9 +30,9 @@ FPATH="${ZDOTDIR}/functions" autoload +X evalcache
 typeset -U path
 
 ## Homebrew
-if type /opt/homebrew/bin/brew > /dev/null 2>&1; then
+if [[ -x /opt/homebrew/bin/brew ]]; then
   evalcache /opt/homebrew/bin/brew shellenv
-elif type /usr/local/bin/brew > /dev/null 2>&1; then
+elif [[ -x /usr/local/bin/brew ]]; then
   evalcache  /usr/local/bin/brew shellenv
 fi
 
@@ -83,7 +83,7 @@ library_path=( ${^library_path}(N-/) )
 
 
 ## readline, openssl
-if type brew > /dev/null 2>&1; then
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
   local readline_path="${HOMEBREW_PREFIX}/opt/readline"
   local openssl_path="${HOMEBREW_PREFIX}/opt/openssl@1.1"
   export LDFLAGS="-L${readline_path}/lib -L${openssl_path}/lib"
