@@ -28,10 +28,13 @@ bindkey '\^' cdup-or-insert-circumflex
 bindkey '^[\^' cd-git-toplevel
 
 ## C-w は リージョンが有効なときは kill-region にする
-## backward-kill-word は `/' と `=' で止まるようにする
-## 元の動作は C-x C-w
-bindkey '^W' kill-region-or-backward-kill-word-non-greedy
-bindkey "^X^W" backward-kill-word
+bindkey '^W' kill-region-or-backward-kill-word
+
+## backward-kill-word 等が日本語でもきちんと動くようにする
+autoload -Uz select-word-style
+select-word-style default
+zstyle ':zle:*' word-chars " /:@+|"
+zstyle ':zle:*' word-style unspecified
 
 ## コマンドの入力中にC-pで、その入力で履歴を検索する
 autoload history-search-end
