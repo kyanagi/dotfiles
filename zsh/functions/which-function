@@ -1,0 +1,3 @@
+# -*- mode: sh; coding: utf-8 -*-
+# fpathの中から関数を探し、見つかったパスを返す
+echo ${^fpath}/"$1"(N)
