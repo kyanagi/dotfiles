@@ -165,7 +165,7 @@ autoload -Uz add-zsh-hook
 
 ## 補完リストに色をつける
 if type dircolors > /dev/null; then
-  eval `dircolors -b` # LS_COLORSの設定
+  evalcache dircolors -b # LS_COLORSの設定
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 else
   zstyle ':completion:*:default' list-colors 'di=34;01' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
@@ -303,7 +303,7 @@ setopt pushd_ignore_dups
 if type zoxide > /dev/null 2>&1; then
   export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
   export _ZO_ECHO="1"
-  eval "$(zoxide init zsh --cmd c)"
+  evalcache zoxide init zsh --cmd c
 fi
 
 ## gitワークツリー内に移動したときはブランチ名を表示
