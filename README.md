@@ -6,9 +6,11 @@
 bash <(curl -sfL https://raw.githubusercontent.com/kyanagi/dotfiles/master/install.sh)
 ```
 
-## ライセンス
+## License
 
-ライセンスはLGPLv3+です。
+MIT
+
+## Author
 
 Kouhei Yanagita yanagi@shakenbu.org
 
