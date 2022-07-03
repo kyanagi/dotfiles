@@ -1,3 +1,2 @@
 zmodule knu/zsh-manydots-magic --source manydots-magic
 zmodule knu/zsh-git-escape-magic --source git-escape-magic
-zmodule completion

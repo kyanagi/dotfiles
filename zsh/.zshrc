@@ -159,9 +159,8 @@ autoload -Uz add-zsh-hook
 ##################################################
 ### 補完
 ## 初期化
-# zimを使うときはいらない
-# autoload -U compinit
-# compinit -u
+autoload -U compinit
+compinit -C -u
 
 ## 補完リストに色をつける
 if type dircolors > /dev/null; then
