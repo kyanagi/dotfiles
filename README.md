@@ -1,8 +1,10 @@
-# 個人用dotfiles
+# Personal dotfiles
 
-## インストール
+## Install
 
-TODO
+```sh
+bash <(curl -sfL https://raw.githubusercontent.com/kyanagi/dotfiles/master/install.sh)
+```
 
 ## ライセンス
 
