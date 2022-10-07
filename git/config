@@ -9,7 +9,7 @@
 	di = diff
 	difff = diff --word-diff
         undo-commit = reset HEAD^
-        delete-merged-branch = !git branch --merged | egrep -v '\\*|\\<(master|main|development)\\>' | xargs git branch -d
+        delete-merged-branch = !git branch --merged | ggrep -E -v '\\*|\\<(master|main|development)\\>' | xargs git branch -d
 [push]
 	default = simple
 [core]
