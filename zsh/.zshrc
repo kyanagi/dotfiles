@@ -193,7 +193,7 @@ zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' verbose yes
 
 ## メッセージフォーマット
-zstyle ':completion:*:descriptions' format '%B%d%b' # 補完リストの上に出てくるdescription
+zstyle ':completion:*:descriptions' format '%F{yellow}%B%d%b%f' # 補完リストの上に出てくるdescription
 zstyle ':completion:*:messages' format '%d' # 補完時のメッセージ
 zstyle ':completion:*:warnings' format 'No matches for: %d' # 補完がマッチしなかったとき
 
