@@ -307,12 +307,13 @@ fi
 
 ## gitワークツリー内に移動したときはブランチ名を表示
 function chpwd-show-git-branch {
-  local git_toplevel
+  local git_toplevel git_branch_name
   git_toplevel=$(git rev-parse --show-toplevel 2> /dev/null)
 
   # 移動先がgitワークツリー内で、移動前と別ワークツリーだったら
   if [[ -n $git_toplevel && $git_toplevel != $git_toplevel_prev ]]; then
-    echo "## ${fg[green]}$(git rev-parse --abbrev-ref @)"
+    git_branch_name=$(git rev-parse --abbrev-ref @ 2> /dev/null) || git_branch_name="(no commit)"
+    echo "## ${fg[green]}${git_branch_name}"
   fi
 
   git_toplevel_prev=${git_toplevel}
