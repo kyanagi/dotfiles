@@ -281,7 +281,7 @@ if type fzf > /dev/null 2>&1; then
   source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
   bindkey "^O" fzf-file-widget
   export FZF_DEFAULT_COMMAND='unset REPORTTIME && rg --color=never --files --no-ignore --hidden --no-messages'
-  export FZF_DEFAULT_OPTS='--height 40% --border'
+  export FZF_DEFAULT_OPTS='--height 40% --border --no-unicode'
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
   export FZF_CTRL_R_OPTS='--bind=ctrl-e:accept'
 fi
