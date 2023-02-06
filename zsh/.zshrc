@@ -286,6 +286,12 @@ if type fzf > /dev/null 2>&1; then
   export FZF_CTRL_R_OPTS='--bind=ctrl-e:accept'
 fi
 
+## terraform
+if type terraform > /dev/null 2>&1; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /opt/homebrew/bin/terraform terraform
+fi
+
 ## ビルトインコマンドでも run-help を使えるようにする
 unalias run-help > /dev/null 2>&1 && autoload -Uz run-help
 
