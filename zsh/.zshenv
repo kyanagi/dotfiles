@@ -25,16 +25,19 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 ## evalcacheの準備
 FPATH="${ZDOTDIR}/functions" autoload +X evalcache
 
-## PATH
-## 重複したパスを登録しない。
-typeset -U path
-
 ## Homebrew
 if [[ -x /opt/homebrew/bin/brew ]]; then
   evalcache /opt/homebrew/bin/brew shellenv
 elif [[ -x /usr/local/bin/brew ]]; then
   evalcache  /usr/local/bin/brew shellenv
 fi
+
+## volta
+export VOLTA_HOME="${XDG_CONFIG_HOME}/volta"
+
+## PATH
+## 重複したパスを登録しない。
+typeset -U path
 
 for formula in grep utils coreutils findutils gnu-tar
 do
@@ -44,8 +47,9 @@ done
 path=(
   ~/bin
   ~/local/bin
-  ~/.nodebrew/current/bin
   /usr/local/bin
+  ${VOLTA_HOME}/bin
+  /opt/homebrew/opt/bison/bin
   $path
 )
 path=( ${^path}(N-/) )
