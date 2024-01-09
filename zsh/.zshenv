@@ -35,6 +35,10 @@ fi
 ## volta
 export VOLTA_HOME="${XDG_CONFIG_HOME}/volta"
 
+## Rust
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+
 ## PATH
 ## 重複したパスを登録しない。
 typeset -U path
@@ -48,6 +52,7 @@ path=(
   ~/bin
   ~/local/bin
   /usr/local/bin
+  ${CARGO_HOME}/bin
   ${VOLTA_HOME}/bin
   /opt/homebrew/opt/bison/bin
   $path
