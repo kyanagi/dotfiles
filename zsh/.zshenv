@@ -125,3 +125,4 @@ less=(
   --LONG-PROMPT
   --RAW-CONTROL-CHARS
 )
+export THOR_MERGE=vimdiff
