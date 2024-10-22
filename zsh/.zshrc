@@ -277,6 +277,7 @@ function zman {
 
 ## fzf
 if type fzf > /dev/null 2>&1; then
+  eval "$(fzf --zsh)"
   source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh"
   source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
   bindkey "^O" fzf-file-widget
