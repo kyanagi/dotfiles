@@ -1,3 +1,7 @@
+### Zim による初期化の前に設定が必要な項目
+## fzf-git のキーバインド
+export FZF_GIT_KEY_PREFIX="^Xg"
+
 ##################################################
 ### Zim
 zstyle ':zim:zmodule' use 'degit'
