@@ -333,6 +333,11 @@ function chpwd-show-git-branch {
 }
 add-zsh-hook chpwd chpwd-show-git-branch
 
+##################################################
+### mise
+if type mise > /dev/null 2>&1; then
+  evalcache mise activate zsh
+fi
 
 ##################################################
 ### その他
