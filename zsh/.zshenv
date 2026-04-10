@@ -94,7 +94,7 @@ library_path=( ${^library_path}(N-/) )
 ## readline, openssl
 if [[ -n "$HOMEBREW_PREFIX" ]]; then
   local readline_path="${HOMEBREW_PREFIX}/opt/readline"
-  local openssl_path="${HOMEBREW_PREFIX}/opt/openssl@1.1"
+  local openssl_path="${HOMEBREW_PREFIX}/opt/openssl@3"
   export LDFLAGS="-L${readline_path}/lib -L${openssl_path}/lib"
   export CPPFLAGS="-I${readline_path}/include -I${openssl_path}/include"
   export PKG_CONFIG_PATH="${readline_path}/lib/pkgconfig:${openssl_path}/lib/pkgconfig"
