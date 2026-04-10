@@ -300,6 +300,8 @@ fi
 ## ビルトインコマンドでも run-help を使えるようにする
 unalias run-help > /dev/null 2>&1 && autoload -Uz run-help
 
+## GPG
+export GPG_TTY=${TTY}
 
 ##################################################
 ### ディレクトリ移動

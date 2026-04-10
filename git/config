@@ -1,6 +1,7 @@
 [user]
 	name = Kouhei Yanagita
 	email = yanagi@shakenbu.org
+	signingKey = E906DBD6E094650B
 [color]
 	ui = auto
 [alias]
@@ -21,3 +22,7 @@
 [init]
 	defaultBranch = main
 
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[commit]
+	gpgsign = true
