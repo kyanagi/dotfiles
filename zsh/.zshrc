@@ -22,7 +22,7 @@ bindkey -e
 for name in $ZDOTDIR/functions/*(.); do
   name=${name:t}
   autoload -Uz $name
-  zle -N $name
+  [[ $name != _* ]] && zle -N $name
 done
 
 ## ^ で cd ..
